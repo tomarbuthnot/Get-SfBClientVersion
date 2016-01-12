@@ -1,4 +1,3 @@
-﻿
 # Currently works for Office 2016 x86 in the default program files path
 
 $SFBEXE = Get-Item ("${Env:ProgramFiles(x86)}" + "\Microsoft Office\root\Office16\lync.exe")
