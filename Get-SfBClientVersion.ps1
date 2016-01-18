@@ -12,7 +12,7 @@ $SfBMSO = Get-Item ("${Env:ProgramFiles(x86)}" + "\Microsoft Office\root\Office1
 $InstallType = "Office 2016 x86 C2R"
 }
 
-# Office 2013 x86 MSI
+# Office 2016 x86 MSI
 
 
 $2016MSIx86Test = Test-Path ("${Env:ProgramFiles(x86)}" + "\Microsoft Office\Office16\lync.exe")
@@ -59,14 +59,26 @@ $InstallType = "Office 2013 x64 C2R"
 
 # Office 2013 x86 MSI
 
-# $2013MSIx86Test = Test-Path ("${Env:ProgramFiles(x86)}" + "\Microsoft Office\Office16\lync.exe")
+$2013MSIx86Test = Test-Path ("${Env:ProgramFiles(x86)}" + "\Microsoft Office\Office15\lync.exe")
 
 IF ($2013MSIx86Test -eq $true)
 {
-$SFBEXE = Get-Item ("${Env:ProgramFiles(x86)}" + "\Microsoft Office\Office16\lync.exe")
-$SfBMSO = Get-Item ("${Env:ProgramFiles(x86)}" + "\Microsoft Office\Office16\MSOSB.DLL")
-$InstallType = "Office 2016 x86 MSI"
+$SFBEXE = Get-Item ("${Env:ProgramFiles(x86)}" + "\Microsoft Office\Office15\lync.exe")
+$SfBMSO = Get-Item ("${Env:ProgramFiles(x86)}" + "\Microsoft Office\Office15\MSOSB.DLL")
+$InstallType = "Office 2013 x86 MSI"
 }
+
+# Office 2013 x64 MSI
+
+$2013MSIx64Test = Test-Path ("${Env:ProgramFiles}" + "\Microsoft Office\Office15\lync.exe")
+
+IF ($2013MSIx64Test -eq $true)
+{
+$SFBEXE = Get-Item ("${Env:ProgramFiles}" + "\Microsoft Office\Office15\lync.exe")
+$SfBMSO = Get-Item ("${Env:ProgramFiles}" + "\Microsoft Office\Office15\MSOSB.DLL")
+$InstallType = "Office 2013 x64 MSI"
+}
+
 
 
 
