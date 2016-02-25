@@ -1,6 +1,15 @@
 # Currently works for Office 2016 x86 in the default program files path
 
 
+<# 
+
+# Run directly from GitHub
+
+$ScriptFromGithHub = Invoke-WebRequest https://raw.githubusercontent.com/tomarbuthnot/Get-SfBClientVersion/master/Get-SfBClientVersion.ps1
+Invoke-Expression $($ScriptFromGithHub.Content)
+
+#>
+
 # Office 2016 x86 C2R
 
 $2016CR2x86Test = Test-Path ("${Env:ProgramFiles(x86)}" + "\Microsoft Office\root\Office16\lync.exe")
@@ -9,6 +18,7 @@ IF ($2016CR2x86Test -eq $true)
 {
 $SFBEXE = Get-Item ("${Env:ProgramFiles(x86)}" + "\Microsoft Office\root\Office16\lync.exe")
 $SfBMSO = Get-Item ("${Env:ProgramFiles(x86)}" + "\Microsoft Office\root\Office16\MSOSB.DLL")
+$SfBUCCAPI = Get-Item ("${Env:ProgramFiles(x86)}" + "\Microsoft Office\root\Office16\UccApi.dll")
 $InstallType = "Office 2016 x86 C2R"
 }
 
@@ -21,6 +31,7 @@ IF ($2016MSIx86Test -eq $true)
 {
 $SFBEXE = Get-Item ("${Env:ProgramFiles(x86)}" + "\Microsoft Office\Office16\lync.exe")
 $SfBMSO = Get-Item ("${Env:ProgramFiles(x86)}" + "\Microsoft Office\Office16\MSOSB.DLL")
+$SfBUCCAPI = Get-Item ("${Env:ProgramFiles(x86)}" + "\Microsoft Office\Office16\UccApi.dll")
 $InstallType = "Office 2016 x86 MSI"
 }
 
@@ -40,6 +51,7 @@ IF ($2013CR2x86Test -eq $true)
 {
 $SFBEXE = Get-Item ("${Env:ProgramFiles(x86)}" + "\Microsoft Office 15\root\office15\lync.exe")
 $SfBMSO = Get-Item ("${Env:ProgramFiles(x86)}" + "\Microsoft Office 15\root\office15\MSOSB.DLL")
+$SfBUCCAPI = Get-Item ("${Env:ProgramFiles(x86)}" + "\Microsoft Office\Office16\UccApi.dll")
 $InstallType = "Office 2013 x86 C2R"
 }
 
@@ -52,6 +64,7 @@ IF ($2013CR2x64Test -eq $true)
 {
 $SFBEXE = Get-Item ("${Env:ProgramFiles}" + "\Microsoft Office 15\root\office15\lync.exe")
 $SfBMSO = Get-Item ("${Env:ProgramFiles}" + "\Microsoft Office 15\root\office15\MSOSB.DLL")
+$SfBUCCAPI = Get-Item ("${Env:ProgramFiles}" + "\Microsoft Office 15\root\office15\UccApi.dll")
 $InstallType = "Office 2013 x64 C2R"
 }
 
@@ -65,6 +78,7 @@ IF ($2013MSIx86Test -eq $true)
 {
 $SFBEXE = Get-Item ("${Env:ProgramFiles(x86)}" + "\Microsoft Office\Office15\lync.exe")
 $SfBMSO = Get-Item ("${Env:ProgramFiles(x86)}" + "\Microsoft Office\Office15\MSOSB.DLL")
+$SfBUCCAPI = Get-Item ("${Env:ProgramFiles(x86)}" + "\Microsoft Office\Office15\UccApi.dll")
 $InstallType = "Office 2013 x86 MSI"
 }
 
@@ -76,9 +90,9 @@ IF ($2013MSIx64Test -eq $true)
 {
 $SFBEXE = Get-Item ("${Env:ProgramFiles}" + "\Microsoft Office\Office15\lync.exe")
 $SfBMSO = Get-Item ("${Env:ProgramFiles}" + "\Microsoft Office\Office15\MSOSB.DLL")
+$SfBUCCAPI = Get-Item ("${Env:ProgramFiles}" + "\Microsoft Office\Office15\UccApi.dll")
 $InstallType = "Office 2013 x64 MSI"
 }
-
 
 
 
@@ -86,10 +100,12 @@ $InstallType = "Office 2013 x64 MSI"
 
 $sfbexeVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($SFBEXE)
 $sfbmsoVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($SfBMSO)
+$UCCAPIVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($SfBUCCAPI)
 
 Write-Host " "
 Write-Host "$InstallType"
 Write-Host "SFB EXE Version: $($sfbexeVersion.fileversion)"
 Write-Host "SFB MSO Version: $($sfbmsoVersion.fileversion)"
+Write-Host "UCCAPI  Version: $($UCCAPIVersion.fileversion)"
 Write-Host " "
 
