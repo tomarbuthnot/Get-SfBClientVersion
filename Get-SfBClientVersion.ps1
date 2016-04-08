@@ -53,7 +53,7 @@ $InstallType = "Office 2016 x64 C2R"
 # Office 2016 x64 MSI
 
 
-$2016MSIx64Test = Test-Path ("${Env:ProgramFiles(x86)}" + "\Microsoft Office\Office16\lync.exe")
+$2016MSIx64Test = Test-Path ("${Env:ProgramFiles}" + "\Microsoft Office\Office16\lync.exe")
 
 IF ($2016MSIx64Test -eq $true)
 {
