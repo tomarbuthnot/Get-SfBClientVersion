@@ -140,3 +140,4 @@ Get-wmiobject Win32_PnPEntity | Where-Object {$_.Service -eq 'usbaudio'} | Selec
 Write-Host "Connected USB Video Devices"
 Get-wmiobject Win32_PnPEntity | Where-Object {$_.Service -eq 'usbvideo'} | Select Name
 
+
