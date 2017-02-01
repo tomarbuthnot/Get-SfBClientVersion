@@ -124,6 +124,9 @@ $InstallType = "Office 2013 x64 MSI"
 
 # Output
 
+$VideoDevices = $(Get-wmiobject Win32_PnPEntity | Where-Object {$_.Service -eq 'usbvideo'}) | Select-Object Name | Out-String
+$AudioDevices = $(Get-wmiobject Win32_PnPEntity | Where-Object {$_.Service -eq 'usbaudio'}) | Select-Object Name | Out-String
+
 $sfbexeVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($SFBEXE)
 $sfbmsoVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($SfBMSO)
 $UCCAPIVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($SfBUCCAPI)
@@ -135,9 +138,6 @@ Write-Host "SFB MSO Version: $($sfbmsoVersion.fileversion)"
 Write-Host "UCCAPI  Version: $($UCCAPIVersion.fileversion)"
 Write-Host " "
 # Thanks Graham Cropley for Idea/code for checking connected devices (https://twitter.com/grahamcropley)
-$VideoDevices = $(Get-wmiobject Win32_PnPEntity | Where-Object {$_.Service -eq 'usbvideo'}) | Select-Object Name | Out-String
-write-host ""
-$AudioDevices = $(Get-wmiobject Win32_PnPEntity | Where-Object {$_.Service -eq 'usbaudio'}) | Select-Object Name | Out-String
 write-host "Connected Audio Devices"
 $AudioDevices
 Write-host "Connected Video Devices"
