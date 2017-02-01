@@ -134,4 +134,7 @@ Write-Host "SFB EXE Version: $($sfbexeVersion.fileversion)"
 Write-Host "SFB MSO Version: $($sfbmsoVersion.fileversion)"
 Write-Host "UCCAPI  Version: $($UCCAPIVersion.fileversion)"
 Write-Host " "
+# Thanks Graham Cropley for Idea/code for checking connected devices
+Write-Host "Connected USB Audio Devices"
+Get-wmiobject Win32_PnPEntity | Where-Object {$_.Service -eq 'usbaudio'} | Select Name
 
